@@ -22,3 +22,9 @@ def test_calculate_total_price(item1):
 def test_apply_discount(item1):
     assert item1.apply_discount() == 8500
 
+
+def test_name():
+    item2 = Item("Смартфон", 10000, 20)
+    assert item2.name == "Смартфон"
+    item3 = Item("Суперсмартфон", 10000, 20)
+    assert item3.name == "Имя не должно превышать 10 символов"
