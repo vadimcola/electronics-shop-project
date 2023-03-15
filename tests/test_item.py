@@ -23,8 +23,13 @@ def test_apply_discount(item1):
     assert item1.apply_discount() == 8500
 
 
-def test_name():
-    item2 = Item("Смартфон", 10000, 20)
-    assert item2.name == "Смартфон"
-    item3 = Item("Суперсмартфон", 10000, 20)
-    assert item3.name == "Имя не должно превышать 10 символов"
+def test_name_ok(item1):
+    item1.name = "Телефон"
+    assert item1.name == "Телефон"
+
+
+def test_name_bed(item1):
+    with pytest.raises(ValueError):
+        item1.name = "СуперСмартфон"
+
+

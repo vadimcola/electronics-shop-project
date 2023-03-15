@@ -39,6 +39,7 @@ class Item:
             reader = csv.DictReader(file)
             for row in reader:
                 cls.all.append(row)
+                print(row)
 
     def calculate_total_price(self) -> float:
         """
@@ -61,5 +62,3 @@ class Item:
             return int(any_string)
         except ValueError:
             return int(any_string[0: any_string.find('.')])
-
-
