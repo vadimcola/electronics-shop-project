@@ -20,7 +20,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        Item.all.append(self)
+        self.all.append(self)
 
     @property
     def name(self):
@@ -38,8 +38,10 @@ class Item:
         with open(cls.CSV_FILE, encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                name, price, quantity = row.get('name'), int(row.get('price')), int(row.get('quantity'))
-                cls.all.append((name, price, quantity))
+                # name, price, quantity = row.get('name'), int(row.get('price')), int(row.get('quantity'))
+                # cls.all.append(cls(name, price, quantity))
+                data = Item(**row)
+                cls.all.append(data)
 
     def calculate_total_price(self) -> float:
         """
