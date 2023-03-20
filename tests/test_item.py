@@ -1,6 +1,5 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
-
 from src.item import Item
 
 
@@ -33,3 +32,12 @@ def test_name_bed(item1):
         item1.name = "СуперСмартфон"
 
 
+def test_str_to_num():
+    assert Item.string_to_number('9.2') == 9
+
+
+def test_instantiate_from_csv(CSV_FILE='./src/items.csv'):
+    assert type(Item.all) is not None
+
+# def test_get_from_cvs():
+#     Item.instantiate_from_csv(CSV_FILE='./src/items.csv')
