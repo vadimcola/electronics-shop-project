@@ -37,7 +37,5 @@ def test_str_to_num():
 
 
 def test_instantiate_from_csv(CSV_FILE='./src/items.csv'):
-    assert type(Item.all) is not None
+    assert Item.all is not None
 
-# def test_get_from_cvs():
-#     Item.instantiate_from_csv(CSV_FILE='./src/items.csv')
