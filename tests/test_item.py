@@ -36,6 +36,7 @@ def test_str_to_num():
     assert Item.string_to_number('9.2') == 9
 
 
-def test_instantiate_from_csv(CSV_FILE='./src/items.csv'):
-    assert Item.all is not None
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv('./src/items.csv')
+
 
