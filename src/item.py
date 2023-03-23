@@ -7,7 +7,7 @@ class Item:
     """
     pay_rate = 0.85
     all = []
-    CSV_FILE = '../src/items.csv'
+
 
     def __init__(self, name: str, price: float, quantity: int):
         """
@@ -34,14 +34,13 @@ class Item:
             raise ValueError("Имя не должно превышать 10 символов")
 
     @classmethod
-    def instantiate_from_csv(cls):
-        with open(cls.CSV_FILE, encoding='windows-1251') as file:
+    def instantiate_from_csv(cls, CSV_FILE='../src/items.csv'):
+        with open(CSV_FILE, encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                # name, price, quantity = row.get('name'), int(row.get('price')), int(row.get('quantity'))
-                # cls.all.append(cls(name, price, quantity))
-                data = Item(**row)
-                cls.all.append(data)
+                name, price, quantity = row.get('name'), int(row.get('price')), int(row.get('quantity'))
+                cls.all.append((name, price, quantity))
+
 
     def calculate_total_price(self) -> float:
         """
@@ -64,7 +63,6 @@ class Item:
             return int(any_string)
         except ValueError:
             return int(any_string[0: any_string.find('.')])
-
 
 # Item.instantiate_from_csv()
 # print(Item.all)
