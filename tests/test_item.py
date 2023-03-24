@@ -40,3 +40,7 @@ def test_instantiate_from_csv():
     Item.instantiate_from_csv('./src/items.csv')
 
 
+def test_magical_methods(item1):
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert str(item1) == 'Смартфон'
+
