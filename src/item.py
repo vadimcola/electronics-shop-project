@@ -8,7 +8,6 @@ class Item:
     pay_rate = 0.85
     all = []
 
-
     def __init__(self, name: str, price: float, quantity: int):
         """
         Создание экземпляра класса item.
@@ -41,7 +40,6 @@ class Item:
                 name, price, quantity = row.get('name'), int(row.get('price')), int(row.get('quantity'))
                 cls.all.append((name, price, quantity))
 
-
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -63,6 +61,12 @@ class Item:
             return int(any_string)
         except ValueError:
             return int(any_string[0: any_string.find('.')])
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"
 
 # Item.instantiate_from_csv()
 # print(Item.all)
