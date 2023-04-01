@@ -1,6 +1,14 @@
 import csv
 
 
+class InstantiateCSVError(Exception):
+    def __init__(self, *args):
+        self.message = args[0] if args else 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -35,11 +43,17 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, CSV_FILE='../src/items.csv'):
-        with open(CSV_FILE, encoding='windows-1251') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                name, price, quantity = row.get('name'), int(row.get('price')), int(row.get('quantity'))
-                cls.all.append((name, price, quantity))
+        try:
+            with open(CSV_FILE, encoding='windows-1251') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    if any(row.get(value) is None for value in ['name', 'price', 'quantity']):
+                        raise InstantiateCSVError
+                    else:
+                        name, price, quantity = row.get('name'), int(row.get('price')), int(row.get('quantity'))
+                        cls.all.append((name, price, quantity))
+        except FileNotFoundError:
+            print("Отсутствует файл item.csv")
 
     def calculate_total_price(self) -> float:
         """
@@ -73,4 +87,5 @@ class Item:
         if not isinstance(other, Item):
             raise ValueError('Складывать можно только объекты Item и дочерние от них.')
         return self.quantity + other.quantity
+
 

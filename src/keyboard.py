@@ -23,5 +23,3 @@ class KeyBoard(Item, MixinLang):
         super().__init__(name, price, quantity)
         self.__language = language
 
-
-
